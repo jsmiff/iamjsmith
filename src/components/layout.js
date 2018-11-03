@@ -8,12 +8,7 @@ import Header from './header'
 import './layout.css'
 
 const Container = styled.div`
-  margin: 3rem auto;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: block;
 `;
 
 const Layout = ({ children, data }) => (
@@ -31,13 +26,9 @@ const Layout = ({ children, data }) => (
       <>
         <Helmet
           title={data.site.siteMetadata.title}
-          // meta={[
-          //   { name: 'description', content: 'Sample' },
-          //   { name: 'keywords', content: 'sample, something' },
-          // ]}
         />
-        <Header siteTitle={data.site.siteMetadata.title} />
         <Container>
+          <Header siteTitle={data.site.siteMetadata.title} />
           {children}
         </Container>
       </>
