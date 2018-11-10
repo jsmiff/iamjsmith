@@ -1,6 +1,10 @@
 @import url('./../styles/normalize.css');
 @import url('https://fonts.googleapis.com/css?family=Anonymous+Pro|Open+Sans');
 
+body {
+  background: black;
+}
+
 h1 {
   font-family: 'Anonymous Pro', monospace;
 }
