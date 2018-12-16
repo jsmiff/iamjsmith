@@ -3,6 +3,8 @@
 
 body {
   background: black;
+  color: white;
+  font-family: 'Open Sans', monospace;
 }
 
 h1 {
@@ -10,5 +12,10 @@ h1 {
 }
 
 p {
-  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  padding-bottom: 1em;
+}
+
+a {
+  color: white;
 }

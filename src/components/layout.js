@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Header from './header'
 import './layout.css'
 
-const Container = styled.div`
+const LayoutContainer = styled.div`
   display: block;
 `;
 
@@ -27,10 +27,10 @@ const Layout = ({ children, data }) => (
         <Helmet
           title={data.site.siteMetadata.title}
         />
-        <Container>
+        <LayoutContainer>
           <Header siteTitle={data.site.siteMetadata.title} />
           {children}
-        </Container>
+        </LayoutContainer>
       </>
     )}
   />

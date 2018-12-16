@@ -1,71 +1,34 @@
 import React from 'react';
-import { Router, Location, navigate } from "@reach/router";
+import styled from 'styled-components';
+import { Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import Layout from '../components/layout';
-import { Grid, Hero, StyledImg, Modal, FullScreenImage, CloseButton, ImageLink } from '../styles/index.styled';
+import { Hero } from '../styles/index.styled';
 
-/* TODO
- * [x] sort images, newest first
- * [x] add click on img to show full screen
- * [] add sick hover to images
- * [] write a lil bio
- * [] exif data
- * [] do day/night mode? (use different folders)
- */
+const HeroContainer = styled(Link)`
+  left: 0;
+  position: relative;
+  top: 0;
+  width: 100%;
+`
 
-const IndexPage = ({ data }) => {
+const PageContainer = styled.div`
+  padding: 2em;
+`
+
+export const IndexPage = ({ data, location, ...props }) => {
+  const firstImage = data.allFile.edges[0].node.childImageSharp.fluid;
+
   return (
     <Layout>
-      <Location>
-        {({ location }) => (
-          <Router location={location}>
-            <HomePage data={data} path="/">
-              <ImageDetailPage data={data} path=":image" />
-            </HomePage>
-          </Router>
-        )}
-      </Location>
-    </Layout>
-  );
-}
-
-const HomePage = ({ data, ...props }) => {
-  const firstImage = data.allFile.edges[0].node.childImageSharp.fluid;
-  const allOtherImages = data.allFile.edges.slice(1);
-  return (
-    <div>
-      { 
-        // this is the nested ImageDetail component
-        props.children 
-      }
-      <ImageLink to={firstImage.originalName.split(`.`)[0]}>
+      <HeroContainer to={`/photos`}>
         <Hero fluid={firstImage} />
-      </ImageLink>
-      <Grid>
-        {allOtherImages.map((p, i) =>
-          <ImageLink key={i} to={p.node.childImageSharp.fluid.originalName.split(`.`)[0]}> 
-            <StyledImg fluid={p.node.childImageSharp.fluid} />
-          </ImageLink>
-        )}
-      </Grid>
-    </div>
-  );
-}
-
-const ImageDetailPage  = ({ data, image, ...props }) => {
-  const imageName = `${image}.jpg`;
-  const fluidImage = data.allFile.edges.filter(e => e.node.childImageSharp.fluid.originalName === imageName)[0];
-
-  const goBack = () => navigate('/');
-
-  return (
-    <Modal>
-      <CloseButton onClick={goBack}>
-        <svg viewBox="0 0 40 40">
-          <path stroke="white" d="M 10,10 L 30,30 M 30,10 L 10,30" />
-        </svg>
-      </CloseButton>
-      <FullScreenImage src={fluidImage.node.childImageSharp.fluid.src}/>
-    </Modal>
+      </HeroContainer>
+      <PageContainer>
+        <p>Hi, I am a web developer living in NYC.</p>
+        <p>Sometimes I take <Link to="photos">photos</Link>.</p>
+      </PageContainer>
+    </Layout>
   );
 }
 
