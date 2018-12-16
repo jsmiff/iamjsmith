@@ -87,7 +87,7 @@ const ImageDetailPage  = ({ data, image, ...props }) => {
   const imageName = `${image}.jpg`;
   const fluidImage = data.allFile.edges.filter(e => e.node.childImageSharp.fluid.originalName === imageName)[0];
 
-  const goBack = () => navigate('/');
+  const goBack = () => navigate('/photos');
 
   return (
     <Modal>
