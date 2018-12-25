@@ -11,6 +11,11 @@ const LayoutContainer = styled.div`
   display: block;
 `;
 
+const Footer = styled.div`
+  padding: 2em;
+  text-align: center;
+`;
+
 const Layout = ({ children, data }) => (
   <StaticQuery
     query={graphql`
@@ -30,6 +35,7 @@ const Layout = ({ children, data }) => (
         <LayoutContainer>
           <Header siteTitle={data.site.siteMetadata.title} />
           {children}
+          <Footer>© 2019 iamjsmith</Footer>
         </LayoutContainer>
       </>
     )}

@@ -71,21 +71,19 @@ export const CloseButton = styled.div`
 export const Photos = ({ data }) => {
   console.log('?')
   return (
-    <Layout>
-      <Location>
-        {({ location }) => (
-          <Router location={location}>
-            <PhotosPage data={data} path="/photos" />
-          </Router>
-        )}
-      </Location>
-    </Layout>
+    <Location>
+      {({ location }) => (
+        <Router location={location}>
+          <PhotosPage data={data} path="/photos" />
+        </Router>
+      )}
+    </Location>
   );
 }
 
 const ImageDetailPage  = ({ data, image, ...props }) => {
   const imageName = `${image}.jpg`;
-  const fluidImage = data.allFile.edges.filter(e => e.node.childImageSharp.fluid.originalName === imageName)[0];
+  const fluidImage = data.photos.edges.filter(e => e.node.childImageSharp.fluid.originalName === imageName)[0];
 
   const goBack = () => navigate('/photos');
 
@@ -102,7 +100,7 @@ const ImageDetailPage  = ({ data, image, ...props }) => {
 }
 
 export const PhotosPage = ({ data, location, ...props }) => {
-  const photos = data.allFile.edges;
+  const photos = data.photos.edges;
   const query = queryString.parse(location.search);
   if (query.image) {
     return <ImageDetailPage data={data} image={query.image} />
@@ -125,7 +123,7 @@ export const PhotosPage = ({ data, location, ...props }) => {
 
 export const query = graphql`
   query {
-    allFile(sort: { fields: name, order: DESC }) {
+    photos: allFile(filter: { sourceInstanceName: { eq: "photos" } }, sort: { fields: name, order: DESC }) {
       edges {
         node {
           childImageSharp {
