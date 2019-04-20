@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import Img from 'gatsby-image';
 
-export const HERO_HEIGHT = '50vh';
+export const HERO_HEIGHT = '50vw';
 
 export const Hero = styled(Img)`
+  margin: 0 auto;
   height: ${HERO_HEIGHT};
-  left: 0; 
-  top: 0;
-  width: 100vw;
+  width: 50vw;
 `

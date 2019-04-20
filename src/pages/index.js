@@ -1,36 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import Img from 'gatsby-image';
-import { Link } from 'gatsby';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import { Hero } from '../styles/index.styled';
 
-import me from './../images/me.jpg';
-
-const HeroContainer = styled(Link)`
-  left: 0;
+const HeroContainer = styled.div`
+  margin-top: 100px;
   position: relative;
-  top: 0;
   width: 100%;
-`
-
-const PageContainer = styled.div`
-  display: flex;
-  padding: 4em;
-`
-
-const LeftColumn = styled.div`
-  flex: 1 1 400px;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-`
-
-const RightColumn = styled.div`
-  flex: 1 1 100%;
-  padding-left: 2em;
 `
 
 export const IndexPage = ({ data, location, ...props }) => {
@@ -38,21 +15,9 @@ export const IndexPage = ({ data, location, ...props }) => {
 
   return (
     <Layout>
-      <HeroContainer to={`/photos`}>
+      <HeroContainer>
         <Hero fluid={firstImage} />
       </HeroContainer>
-      <PageContainer>
-        <LeftColumn>
-          <Img fluid={data.me.childImageSharp.fluid} />
-        </LeftColumn>
-        <RightColumn>
-          <h2>About me</h2>
-          <p>Heya, I am a web developer living in NYC.</p>
-          <p>I work full time on web related things @ Spotify.</p>
-          <p>I also run a <a href="http://engagemore.com">company</a> that helps gyms.</p>
-          <p>Sometimes I take <Link to="photos">photos</Link>.</p>
-        </RightColumn>
-      </PageContainer>
     </Layout>
   );
 }
